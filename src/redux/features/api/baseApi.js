@@ -9,6 +9,12 @@ const baseApi = createApi({
     getPosts: builder.query({
       query: () => "/posts",
     }),
+    // or
+    // getPosts: builder.query({
+    //   query: () => ({
+    //     url: "/posts",
+    //   }),
+    // }),
     getUsers: builder.query({
       query: () => "/users",
     }),
@@ -16,8 +22,20 @@ const baseApi = createApi({
       // here you can only accept a sigle parameter
       query: (id) => `/posts/${id}`,
     }),
+    setPost: builder.mutation({
+      query: (post) => ({
+        url: "/posts",
+        method: "POST",
+        body: post,
+      }),
+    }),
   }),
 });
 
-export const { useGetPostsQuery, useGetPostByIdQuery, useGetUsers } = baseApi;
+export const {
+  useGetPostsQuery,
+  useGetPostByIdQuery,
+  useGetUsers,
+  useSetPostMutation,
+} = baseApi;
 export default baseApi;

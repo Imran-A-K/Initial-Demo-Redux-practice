@@ -1,4 +1,5 @@
 "use client";
+import { useSetPostMutation } from "@/redux/features/api/baseApi";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -6,9 +7,20 @@ function Page() {
   const router = useRouter();
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (value) => {
-    console.log(value);
+  const [setPost, { data: postData }] = useSetPostMutation();
+
+  console.log(postData);
+  const onSubmit = (data) => {
+    // setPost(data);
+    setPost({
+      title: "This is a title",
+      body: data.post,
+      userId: 5644,
+    });
   };
+
+  //   const [function, object] = useSetPostMutation()
+
   return (
     <div>
       <button
